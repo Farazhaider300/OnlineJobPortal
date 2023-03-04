@@ -1,9 +1,10 @@
 package com.example.JobPortal.entity;
 
-import jakarta.persistence.*;
-import lombok.Data;
 
-@Data
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 @Entity
 @Table(name = "user")
 public class User {
@@ -11,8 +12,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Enumerated(EnumType.STRING)
-    private userRole status;
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
@@ -21,9 +20,5 @@ public class User {
     private String email;
     @Column(name = "password")
     private long password;
-    public enum userRole{
-        JOB_SEEKER,
-        JOB_POSTER
-    }
 
 }
