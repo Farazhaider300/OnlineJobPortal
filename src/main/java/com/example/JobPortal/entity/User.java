@@ -2,15 +2,18 @@ package com.example.JobPortal.entity;
 
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
+
+import java.util.List;
+
+@Data
 @Entity
 @Table(name = "user")
+
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "user_id")
     private Long id;
     @Column(name = "first_name")
     private String firstName;
@@ -20,5 +23,9 @@ public class User {
     private String email;
     @Column(name = "password")
     private long password;
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "user")
+    private List<UserRole>userRoles;
+
+
 
 }
