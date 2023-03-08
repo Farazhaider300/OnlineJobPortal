@@ -21,7 +21,5 @@ public class Job {
     private long salary;
     @Column(name = "address")
     private String address;
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private UserRole userRole;
+
 }

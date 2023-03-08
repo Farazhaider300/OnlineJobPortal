@@ -4,7 +4,8 @@ package com.example.JobPortal.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Entity
@@ -24,7 +25,7 @@ public class User {
     @Column(name = "password")
     private long password;
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "user")
-    private List<UserRole>userRoles;
+    private Set<UserRole> userRole= new HashSet<>();
 
 
 

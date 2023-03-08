@@ -3,7 +3,8 @@ package com.example.JobPortal.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -16,7 +17,7 @@ public class Role {
     @Column(name = "role")
     private String role;
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "role")
-    private List<UserRole> userRoles;
+    private Set<UserRole> userRoles =new HashSet<>();
 
 
 }
