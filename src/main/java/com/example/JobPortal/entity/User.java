@@ -23,7 +23,7 @@ public class User {
     @Column(name = "email")
     private String email;
     @Column(name = "password")
-    private long password;
+    private String password;
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "user")
     private Set<UserRole> userRole= new HashSet<>();
 
