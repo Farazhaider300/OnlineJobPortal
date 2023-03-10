@@ -1,11 +1,10 @@
 package com.example.JobPortal.entity;
-
-
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Data
 @Entity
@@ -14,7 +13,7 @@ import java.util.Set;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "User_id")
+    @Column(name = "user_id")
     private Long id;
     @Column(name = "first_name")
     private String firstName;
@@ -24,13 +23,6 @@ public class User {
     private String email;
     @Column(name = "password")
     private String password;
-  /*  @OneToMany
-    @JoinColumn(name = "role_id")
-    private Role role;*/
     @OneToMany(mappedBy = "user")
-
-    private Set<UserRole> userRole= new HashSet<>();
-
-
-
+    private List<UserRole> userRole;
 }
