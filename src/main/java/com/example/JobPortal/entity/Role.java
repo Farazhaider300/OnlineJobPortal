@@ -3,7 +3,9 @@ package com.example.JobPortal.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
+
 
 @Entity
 @Data
@@ -12,13 +14,10 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id")
-    private long roleid;
+    private long roleId;
     @Column(name = "role_name")
-    private String rolename;
-/*
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "role")
+    private String roleName;
+    @OneToMany(mappedBy = "role")
     private List<UserRole> userRoles;
-*/
-
 
 }
