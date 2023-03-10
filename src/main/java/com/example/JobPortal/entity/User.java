@@ -14,7 +14,7 @@ import java.util.Set;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+    @Column(name = "User_id")
     private Long id;
     @Column(name = "first_name")
     private String firstName;
@@ -24,7 +24,11 @@ public class User {
     private String email;
     @Column(name = "password")
     private String password;
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "user")
+  /*  @OneToMany
+    @JoinColumn(name = "role_id")
+    private Role role;*/
+    @OneToMany(mappedBy = "user")
+
     private Set<UserRole> userRole= new HashSet<>();
 
 

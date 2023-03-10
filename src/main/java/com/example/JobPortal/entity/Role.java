@@ -3,8 +3,7 @@ package com.example.JobPortal.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Data
@@ -14,10 +13,12 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id")
     private long roleid;
-    @Column(name = "role")
-    private String role;
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "role")
-    private Set<UserRole> userRoles =new HashSet<>();
+    @Column(name = "role_name")
+    private String rolename;
+/*
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "role")
+    private List<UserRole> userRoles;
+*/
 
 
 }
