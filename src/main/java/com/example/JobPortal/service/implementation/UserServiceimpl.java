@@ -1,4 +1,4 @@
-package com.example.JobPortal.service;
+package com.example.JobPortal.service.implementation;
 import com.example.JobPortal.entity.Role;
 import com.example.JobPortal.entity.User;
 import com.example.JobPortal.entity.UserRole;
@@ -6,11 +6,12 @@ import com.example.JobPortal.model.UserModel;
 import com.example.JobPortal.repository.RoleRepository;
 import com.example.JobPortal.repository.UserRepository;
 import com.example.JobPortal.repository.UserRoleRepository;
+import com.example.JobPortal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceimpl implements  UserService {
+public class UserServiceimpl implements UserService {
 
     @Autowired
     public UserRepository userRepository;
