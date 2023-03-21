@@ -1,0 +1,17 @@
+{
+    "firstName": "Faraz",
+    "lastName": "haider",
+    "email": "farazhaider300@gmail.com",
+    "password": "farazhaider@",
+    "role": "JOB_SEEKER"
+  
+}
+
+{
+    "title":"MERN Developer",
+    "description":"we are hiring mern stack Developer",
+    "salary":"22000",
+    "address":"gulberg",
+    "role": "JOB_SEEKER"
+    
+}
