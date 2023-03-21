@@ -1,8 +1,9 @@
 package com.example.JobPortal.service;
 
 import com.example.JobPortal.entity.User;
+import com.example.JobPortal.model.UserModel;
 
 public interface UserService {
-    /*public User signup(String firstName,String lastName, String email, String password);*/
-    public User signup(User adduser);
+
+    UserModel saveuser(UserModel userModel);
 }

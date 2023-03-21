@@ -1,9 +1,8 @@
 package com.example.JobPortal.controller;
 
 import com.example.JobPortal.entity.User;
-import com.example.JobPortal.model.UserModel;
-import com.example.JobPortal.service.UserService;
-import com.example.JobPortal.service.UserServiceimpl;
+import com.example.JobPortal.model.JobModel;
+import com.example.JobPortal.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,16 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/user")
-public class UserController
+@RequestMapping(path = "/job")
+public class JobController
 {
     @Autowired
-    public UserService userService;
-
-    @PostMapping("signup")
-    public UserModel signin(@RequestBody UserModel userModel)
+    private JobService jobService;
+    @PostMapping(path = "/postjob")
+    public JobModel postJob(@RequestBody JobModel jobModel, User user)
     {
-      return userService.saveuser(userModel);
+        JobModel response= jobService.savejob(jobModel);
+        return response;
     }
-
 }

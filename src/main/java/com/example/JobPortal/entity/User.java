@@ -1,19 +1,17 @@
 package com.example.JobPortal.entity;
 import jakarta.persistence.*;
 import lombok.Data;
-
-import java.util.ArrayList;
 import java.util.List;
+
 
 
 @Data
 @Entity
 @Table(name = "user")
-
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+    @Column(name = "id")
     private Long id;
     @Column(name = "first_name")
     private String firstName;
@@ -23,6 +21,8 @@ public class User {
     private String email;
     @Column(name = "password")
     private String password;
+    @Column(name = "status")
+    private boolean status;
     @OneToMany(mappedBy = "user")
-    private List<UserRole> userRole;
+    private List<UserRole> userRoles;
 }
