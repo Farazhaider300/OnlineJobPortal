@@ -10,6 +10,7 @@ import com.example.JobPortal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class UserServiceimpl implements UserService {
 
@@ -21,22 +22,37 @@ public class UserServiceimpl implements UserService {
     @Autowired
     public UserRoleRepository userRoleRepository;
 
+    public String saveuser(UserModel userModel) {
+
+        String incomingEmail = userModel.getEmail();
+        User userExist = userRepository.findUserByEmail(incomingEmail);
+        if (userExist != null) {
+            return "User already exist with same email id!";
+        } else {
+
+            Role role = new Role();
+            role.setRoleName(userModel.getRole());
+            roleRepository.save(role);
+            User user = new User();
+            user = userModel.dissemble();
+            userRepository.save(user);
+            UserRole userRole = new UserRole();
+            userRole.setUser(user);
+            userRole.setRole(role);
+            userRoleRepository.save(userRole);
+            return "User saved successfully!";
+        }
+    }
+
+}
+
+ /*
 
 
-    public UserModel saveuser(UserModel userModel) {
-
-        Role role=new Role();
-        role.setRoleName(userModel.getRole());
-        roleRepository.save(role);
-        User user=new User();
-        user = userModel.dissemble();
-        userRepository.save(user);
-        UserRole userRole =new UserRole();
-        userRole.setUser(user);
-        userRole.setRole(role);
-        userRoleRepository.save(userRole);
-        return userModel;
- /*       Role role = new Role();
+      if( equals(userModel.getEmail())
+        userRepository.findAll().contains(userModel.getEmail()))
+        {
+        Role role = new Role();
         role.setRoleName(userModel.getRole());
         roleRepository.save(role);
         User user=new User();
@@ -46,8 +62,7 @@ public class UserServiceimpl implements UserService {
         userRole.setRole(role);
         userRole.setUser(user);
         userRoleRepository.save(userRole);
-        return userModel;*/
-    }
-}
+        return userModel;
+        }*/
 
 

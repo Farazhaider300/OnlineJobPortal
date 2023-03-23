@@ -5,5 +5,6 @@ import com.example.JobPortal.model.UserModel;
 
 public interface UserService {
 
-    UserModel saveuser(UserModel userModel);
+    String saveuser(UserModel userModel);
+
 }
