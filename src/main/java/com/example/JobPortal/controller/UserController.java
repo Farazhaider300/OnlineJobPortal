@@ -1,6 +1,7 @@
 package com.example.JobPortal.controller;
 
 import com.example.JobPortal.entity.User;
+import com.example.JobPortal.model.UserLoginModel;
 import com.example.JobPortal.model.UserModel;
 import com.example.JobPortal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +15,14 @@ public class UserController
     public UserService userService;
 
     @PostMapping(path = "signup")
-    public String signin(@RequestBody UserModel userModel)
+    public String signup(@RequestBody UserModel userModel)
     {
       return userService.saveuser(userModel);
     }
     @GetMapping(path = "login")
-    public String login(@RequestBody UserModel userModel, User user)
+    public String login(@RequestBody UserLoginModel userLoginModel)
     {
-        return null;
+
+        return userService.isUserExist(userLoginModel);
     }
 }

@@ -13,7 +13,7 @@ public class PostJob {
     @Column(name = "id")
     private Long id;
 
-    //Creating relation between Post job and job
+    //Creating relation between userRole and job
     @ManyToOne
     private UserRole userRole;
 

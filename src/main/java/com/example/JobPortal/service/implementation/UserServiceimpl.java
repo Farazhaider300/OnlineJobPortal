@@ -2,7 +2,9 @@ package com.example.JobPortal.service.implementation;
 import com.example.JobPortal.entity.Role;
 import com.example.JobPortal.entity.User;
 import com.example.JobPortal.entity.UserRole;
+import com.example.JobPortal.model.UserLoginModel;
 import com.example.JobPortal.model.UserModel;
+import com.example.JobPortal.repository.JobRepository;
 import com.example.JobPortal.repository.RoleRepository;
 import com.example.JobPortal.repository.UserRepository;
 import com.example.JobPortal.repository.UserRoleRepository;
@@ -21,7 +23,9 @@ public class UserServiceimpl implements UserService {
 
     @Autowired
     public UserRoleRepository userRoleRepository;
-
+    @Autowired
+    public JobRepository jobRepository;
+    @Override
     public String saveuser(UserModel userModel) {
 
         String incomingEmail = userModel.getEmail();
@@ -31,38 +35,29 @@ public class UserServiceimpl implements UserService {
         } else {
 
             Role role = new Role();
-            role.setRoleName(userModel.getRole());
-            roleRepository.save(role);
-            User user = new User();
-            user = userModel.dissemble();
-            userRepository.save(user);
+            role.setId(userModel.getRoleid());
+            User user=userRepository.save(userModel.dissemble());
             UserRole userRole = new UserRole();
-            userRole.setUser(user);
             userRole.setRole(role);
+            userRole.setUser(user);
             userRoleRepository.save(userRole);
             return "User saved successfully!";
         }
     }
-
-}
-
- /*
-
-
-      if( equals(userModel.getEmail())
-        userRepository.findAll().contains(userModel.getEmail()))
+    @Override
+    public String isUserExist(UserLoginModel userLoginModel){
+        String incomingEmail= userLoginModel.getEmail();
+        String incomingPassword=userLoginModel.getPassword();
+        User confirmDetail= userRepository.findByEmailAndPassword(incomingEmail,incomingPassword);
+        if (confirmDetail!=null)
         {
-        Role role = new Role();
-        role.setRoleName(userModel.getRole());
-        roleRepository.save(role);
-        User user=new User();
-        userModel.setUser(user);
-        userRepository.save(user);
-        UserRole userRole = new UserRole();
-        userRole.setRole(role);
-        userRole.setUser(user);
-        userRoleRepository.save(userRole);
-        return userModel;
-        }*/
+            return "Login successfully" ;
+
+        }else {
+            return "User not Exist Please Signup...";
+
+        }
+    }
+}
 
 
