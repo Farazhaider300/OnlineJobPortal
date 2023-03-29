@@ -15,7 +15,6 @@ public class PostJobModel {
     private Date date;
     private long salary;
     private String address;
-
     private String email;
     private String password;
 
@@ -36,6 +35,7 @@ public class PostJobModel {
         job.setDescription(this.description);
         job.setAddress(this.address);
         job.setSalary(this.salary);
+        job.setPostJob(this.dissemble().getPostJob());
         return job;
     }
 

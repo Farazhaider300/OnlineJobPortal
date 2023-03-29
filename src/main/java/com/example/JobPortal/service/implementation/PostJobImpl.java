@@ -1,12 +1,12 @@
 package com.example.JobPortal.service.implementation;
 
-import com.example.JobPortal.entity.Role;
-import com.example.JobPortal.entity.User;
+import com.example.JobPortal.entity.*;
 import com.example.JobPortal.model.PostJobModel;
 import com.example.JobPortal.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -17,24 +17,25 @@ public class PostJobImpl {
     @Autowired
     private UserRepository userRepository;
     @Autowired
+    private RoleRepository roleRepository;
+    @Autowired
     private JobRepository jobRepository;
     @Autowired
-    private RoleRepository roleRepository;
+    private UserRoleRepository userRoleRepository;
 
     public String postNewJob(PostJobModel postJobModel){
         String incomingEmail= postJobModel.getEmail();
-        String incomingPassword=postJobModel.getPassword();
-        User confirmDetail= userRepository.findByEmailAndPassword(incomingEmail,incomingPassword);
-        if (confirmDetail!=null)
+        /*String incomingPassword=postJobModel.getPassword()*/;
+        /*User confirmDetail=userRepository.getRoleByEmail();*/
+        User user= userRepository.findUserByEmail(incomingEmail);
+        Role role= roleRepository.getRoleByEmail(incomingEmail);
+        if (role!=null && role.getRoleName().equals("Job_Poster"))
         {
-
-            jobRepository.save(postJobModel.dissemble());
-/*            PostJob postJob=new PostJob();
-            postJob.setId(userRole.getId());*/
-                return "Job Post successfully";
-        }else {
+            return "Job Post successfully";
+        }
+       else
+       {
             return "User Permission not allowed";
-
         }
     }
 }

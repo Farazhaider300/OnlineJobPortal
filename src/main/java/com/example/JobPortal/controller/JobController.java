@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "job")
+@RequestMapping(path = "home")
 public class JobController
 {
     @Autowired
@@ -19,8 +19,12 @@ public class JobController
     @Autowired
     private PostJobImpl postJobimpl;
     @GetMapping(path = "findjob")
-    public List<JobModel> findJob(){
+    public List<JobModel> ShowAllJobs(){
         return JobServiceImp.showAllJobs();
+    }
+    @GetMapping(path = "findjob/{JobTitle}")
+    public List<JobModel> findJobByTitle(@PathVariable("JobTitle") String SearchJob){
+        return JobServiceImp.showAllJobsByTitle( "%"+SearchJob+ "%");
     }
     @PostMapping(path = "postjob")
     public String postJob(@RequestBody PostJobModel postJobModel)

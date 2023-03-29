@@ -16,13 +16,21 @@ public class JobServiceImp   {
 @Transactional
 public List<JobModel> showAllJobs()
 {
+
     List<JobModel> jobModels = new ArrayList<>();
     for (Job job : (List<Job>) jobRepository.findAll()) {
         jobModels.add(new JobModel().assemble(job));
     }
-
-
-    return jobModels;
+   return jobModels;
 }
+    public List<JobModel> showAllJobsByTitle(String SearchJob)
+    {
+
+        List<JobModel> jobModel = new ArrayList<>();
+        for (Job job : (List<Job>) jobRepository.findByTitleContaining( "%"+SearchJob+ "%")) {
+            jobModel.add(new JobModel().assemble(job));
+        }
+        return jobModel;
+    }
 
 }

@@ -24,5 +24,5 @@ public class User {
     @Column(name = "status")
     private boolean status;
     @OneToMany(mappedBy = "user")
-    private List<UserRole> userRoles;
+    private List<UserRole> userRole;
 }
