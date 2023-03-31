@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class PostJobController {
-    @Autowired
+/*    @Autowired
     private PostJobImpl postJobimpl;
     @PostMapping(path = "postjob")
     public String postJob(@RequestBody PostJobModel postJobModel){
 
      return postJobimpl.postNewJob(postJobModel);
-    }
+    }*/
 }

@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 
 public class PostJobImpl {
-    @Autowired
+   /* @Autowired
     private PostJobRepository postJobRepository;
     @Autowired
     private UserRepository userRepository;
@@ -25,8 +25,8 @@ public class PostJobImpl {
 
     public String postNewJob(PostJobModel postJobModel){
         String incomingEmail= postJobModel.getEmail();
-        /*String incomingPassword=postJobModel.getPassword()*/;
-        /*User confirmDetail=userRepository.getRoleByEmail();*/
+        *//*String incomingPassword=postJobModel.getPassword()*//*;
+        *//*User confirmDetail=userRepository.getRoleByEmail();*//*
         User user= userRepository.findUserByEmail(incomingEmail);
         Role role= roleRepository.getRoleByEmail(incomingEmail);
         if (role!=null && role.getRoleName().equals("Job_Poster"))
@@ -37,5 +37,5 @@ public class PostJobImpl {
        {
             return "User Permission not allowed";
         }
-    }
+    }*/
 }

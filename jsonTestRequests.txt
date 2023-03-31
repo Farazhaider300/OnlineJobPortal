@@ -8,6 +8,8 @@
 }
 
 {
+    "email": "farazhaider300@gmail.com",
+    "password": "farazhaider@",
     "title":"MERN Developer",
     "description":"we are hiring mern stack Developer",
     "salary":"22000",
@@ -17,3 +19,11 @@
 }
 select * from jobportal.user_role ur inner join jobportal.user u on ur.user_id = u.id inner join
 jobportal.role r on ur.role_id = r.id;  
+
+select u.* from jobportal.user_role ur inner join jobportal.user u on ur.user_id = u.id inner join
+            jobportal.role r on ur.role_id = r.id;
+
+
+
+select j1_0.id,j1_0.address,j1_0.apply_job_id,j1_0.date,j1_0.description,j1_0.post_job_id,j1_0.salary,j1_0.title 
+from jobportal.job_detail j1_0 where j1_0.title like '%mern%';
