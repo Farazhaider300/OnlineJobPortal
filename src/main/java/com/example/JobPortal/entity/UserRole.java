@@ -25,12 +25,12 @@ public class UserRole {
    @ManyToOne
    @JoinColumn(name = "role_id")
     private Role role;
-
+/*
    //Creating job_seeker relation
    @OneToMany(mappedBy = "userRole")
     private List<ApplyJob> applyJob;
 
    //Creating relation between userRole and post job
     @OneToMany(mappedBy = "userRole")
-    private List<PostJob>postJobs;
+    private List<PostJob>postJobs;*/
 }

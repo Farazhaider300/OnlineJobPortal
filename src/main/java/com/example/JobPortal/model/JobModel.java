@@ -14,7 +14,6 @@ public class JobModel {
     private String address;
 
 
-
     public JobModel assemble(Job job)
     {
       JobModel jobModel=new JobModel();
@@ -24,4 +23,5 @@ public class JobModel {
       jobModel.setSalary(job.getSalary());
       return jobModel;
     }
+
 }

@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class ApplyJobModel {
     private String email;
-    private Long id;
+    private Long jobId;
  /*   public JobModel Assemble(){
         thi
     }*/

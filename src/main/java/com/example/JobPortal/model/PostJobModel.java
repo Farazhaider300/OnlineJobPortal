@@ -16,9 +16,9 @@ public class PostJobModel {
     private long salary;
     private String address;
     private String email;
-    private String password;
+    private String company;
 
-    // convert UI/model object to entity object
+    // convert Entity object into UI/model  object
     public PostJobModel assemble(Job job){
         PostJobModel postJobModel =new PostJobModel();
         postJobModel.setTitle(job.getTitle());
@@ -28,14 +28,15 @@ public class PostJobModel {
         return postJobModel;
     }
 
-    // convert Entity object to UI/model  object
+    // convert UI/model object into entity object
     public Job dissemble(){
         Job job=new Job();
         job.setTitle(this.title);
         job.setDescription(this.description);
         job.setAddress(this.address);
         job.setSalary(this.salary);
-        job.setPostJob(this.dissemble().getPostJob());
+        job.setCompany(this.company);
+
         return job;
     }
 

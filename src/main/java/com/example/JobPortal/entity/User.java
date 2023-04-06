@@ -25,4 +25,12 @@ public class User {
     private boolean status;
     @OneToMany(mappedBy = "user")
     private List<UserRole> userRole;
+
+    //Creating job_seeker relation
+    @OneToMany(mappedBy = "user")
+    private List<ApplyJob> applyJob;
+
+    //Creating relation between user and post job
+    @OneToMany(mappedBy = "user")
+    private List<PostJob>postJobs;
 }

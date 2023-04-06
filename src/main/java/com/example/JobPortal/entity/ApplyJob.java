@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Data
@@ -16,12 +15,13 @@ public class ApplyJob {
     private Long id;
     @Column(name = "date")
     private Date date;
-  //Creating relation between UserRole and apply jobs
+    //Creating relation between UserRole and apply jobs
     @ManyToOne
-    @JoinColumn(name = "user_role_id")
-    private UserRole userRole;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     //Creating relation between apply job and job
-    @OneToMany(mappedBy = "applyJob")
-    private List<Job> job;
+    @ManyToOne
+    @JoinColumn(name = "job_id")
+    private Job job;
 }

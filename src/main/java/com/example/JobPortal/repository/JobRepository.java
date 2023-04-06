@@ -9,6 +9,7 @@ import java.util.List;
 public interface JobRepository extends JpaRepository<Job,Long> {
     public List<Job> findByTitleContaining(String SearchJob);
     public List<Job> findByTitleLike(String SearchJob);
+    public List<Job> findByAddressLike(String SearchJob);
     public Job findJobById(Long IncomingJobId);
 
 }

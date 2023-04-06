@@ -18,6 +18,8 @@ public class Job {
     private String title;
     @Column(name = "description")
     private String description;
+    @Column(name = "company_name")
+    private String company;
     @Column(name = "date")
     private Date date;
     @Column(name = "salary")
@@ -26,11 +28,11 @@ public class Job {
     private String address;
 
     //Creating relation between job and apply jobs
-    @ManyToOne
-    private ApplyJob applyJob;
+   @OneToMany(mappedBy = "job")
+   private List<ApplyJob> applyJobList;
 
     //Creating relation between job and post job
-    @ManyToOne
-    private PostJob postJob;
+    @OneToMany(mappedBy = "job")
+    private List<PostJob> postJob;
 
 }

@@ -12,7 +12,9 @@ public interface JobService {
     List<JobModel> showAllJobsByTitle(String searchJob);
     List<JobModel> showAllJobsByAddress(String address);
     String postNewJob(PostJobModel postJobModel);
-    String ApplyForJob(ApplyJobModel applyJobModel);
+    String applyForJob(ApplyJobModel applyJobModel);
 
     String removeJob(Long jobId);
+
+    List<JobModel> viewUserPostJob(String postJobModel);
 }

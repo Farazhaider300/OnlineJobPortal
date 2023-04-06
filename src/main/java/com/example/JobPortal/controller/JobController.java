@@ -1,5 +1,6 @@
 package com.example.JobPortal.controller;
 
+import com.example.JobPortal.entity.Job;
 import com.example.JobPortal.model.ApplyJobModel;
 import com.example.JobPortal.model.JobModel;
 import com.example.JobPortal.model.PostJobModel;
@@ -17,7 +18,7 @@ public class JobController
 
 
     @GetMapping(path = "findjob")
-    public List<JobModel> ShowAllJobs()
+    public List<JobModel> showAllJobs()
     {
         return JobService.showAllJobs();
     }
@@ -26,10 +27,10 @@ public class JobController
     {
             return JobService.showAllJobsByTitle( "%"+searchJob+ "%");
     }
-    @GetMapping(path = "findjob/{Address}")
-    public List<JobModel> findByAddressContaining(@PathVariable("JobTitle") String address)
+    @GetMapping(path = "findjob/location/{Address}")
+    public List<JobModel> findByAddressContaining(@PathVariable("Address") String address)
     {
-        return JobService.showAllJobsByAddress(address);
+        return JobService.showAllJobsByAddress("%"+address+"%");
     }
     @PostMapping(path = "postjob")
     public String postJob(@RequestBody PostJobModel postJobModel)
@@ -40,10 +41,15 @@ public class JobController
     @PostMapping(path = "applyjob")
     public String applyForJob(@RequestBody ApplyJobModel applyJobModel)
     {
-        return JobService.ApplyForJob(applyJobModel);
+        return JobService.applyForJob(applyJobModel);
+    }
+    @GetMapping(path = "view/job")
+    public List<JobModel> viewUserPostJob(@RequestBody String email){
+        return JobService.viewUserPostJob(email);
+
     }
     @DeleteMapping(path = "job/{jobId}")
-    public String DeleteJobd(@PathVariable("jobId") Long jobId){
+    public String DeleteJobId(@PathVariable("jobId") Long jobId){
         return JobService.removeJob(jobId);
     }
 

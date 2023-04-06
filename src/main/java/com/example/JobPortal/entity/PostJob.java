@@ -15,11 +15,11 @@ public class PostJob {
 
     //Creating relation between userRole and job
     @ManyToOne
-    private UserRole userRole;
+    private User user;
 
     //Creating relation between post job and job
-    @OneToMany(mappedBy = "postJob")
-    private List<Job> Job;
+    @ManyToOne
+    private Job job;
 
 
 }
