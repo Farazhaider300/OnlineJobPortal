@@ -87,9 +87,9 @@ public class JobServiceImp implements JobService {
         Long incomingJobId=applyJobModel.getJobId();
         UserRole userRole=userRoleRepository.findUserRoleByUser_email(incomingEmail);
         Job job=jobRepository.findJobById(incomingJobId);
-        List<ApplyJob> checkApplyAlready= applyJobRepository.findAllJobByUser_Id(incomingJobId);
-        if (checkApplyAlready!=null ){
-            checkApplyAlready.stream().filter(e-> e.getJob().getId().equals(incomingJobId));
+        ApplyJob checkApplyAlready= applyJobRepository.findApplyJobByUser_EmailAndJob_Id(incomingEmail,incomingJobId);
+        if (checkApplyAlready!=null && userRole!=null && userRole.getRole().getRoleName().equals("Job_Seeker")  ){
+            /*checkApplyAlready.stream().filter(e-> e.getJob().getId().equals(incomingJobId));*/
            /* List<ApplyJobModel>applyJobModels=new ArrayList<>();
             for (ApplyJob applyJob:checkApplyAlready) {
                 applyJobModels.add(new ApplyJobModel().getJobId());
