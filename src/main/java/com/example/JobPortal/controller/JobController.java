@@ -1,56 +1,58 @@
 package com.example.JobPortal.controller;
 
 import com.example.JobPortal.entity.Job;
-import com.example.JobPortal.model.ApplyJobModel;
-import com.example.JobPortal.model.JobModel;
-import com.example.JobPortal.model.PostJobModel;
+import com.example.JobPortal.entity.PostJob;
+import com.example.JobPortal.model.*;
 import com.example.JobPortal.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collection;
 import java.util.List;
 
 @RestController
 @RequestMapping(path = "home")
-public class JobController
-{
+public class JobController {
     @Autowired
     private JobService JobService;
 
 
     @GetMapping(path = "findjob")
-    public List<JobModel> showAllJobs()
-    {
+    public List<JobModel> showAllJobs() {
         return JobService.showAllJobs();
     }
+
     @GetMapping(path = "findjob/{JobTitle}")
-    public List<JobModel> findJobByTitle(@PathVariable("JobTitle") String searchJob)
-    {
-            return JobService.showAllJobsByTitle( "%"+searchJob+ "%");
+    public List<JobModel> findJobByTitle(@PathVariable("JobTitle") String searchJob) {
+        return JobService.showAllJobsByTitle("%" + searchJob + "%");
     }
+
     @GetMapping(path = "findjob/location/{Address}")
-    public List<JobModel> findByAddressContaining(@PathVariable("Address") String address)
-    {
-        return JobService.showAllJobsByAddress("%"+address+"%");
+    public List<JobModel> findByAddressContaining(@PathVariable("Address") String address) {
+        return JobService.showAllJobsByAddress("%" + address + "%");
     }
+
     @PostMapping(path = "postjob")
-    public String postJob(@RequestBody PostJobModel postJobModel)
-    {
+    public String postJob(@RequestBody PostJobModel postJobModel) {
 
         return JobService.postNewJob(postJobModel);
     }
+
     @PostMapping(path = "applyjob")
-    public String applyForJob(@RequestBody ApplyJobModel applyJobModel)
-    {
+    public String applyForJob(@RequestBody ApplyJobModel applyJobModel) {
         return JobService.applyForJob(applyJobModel);
     }
-    @GetMapping(path = "view/job")
-    public List<JobModel> viewUserPostJob(@RequestBody String email){
-        return JobService.viewUserPostJob(email);
-
-    }
     @DeleteMapping(path = "job/{jobId}")
-    public String DeleteJobId(@PathVariable("jobId") Long jobId){
+    public String deleteJobId(@PathVariable("jobId") Long jobId){
         return JobService.removeJob(jobId);
     }
+    @GetMapping(path = "view/postjob")
+    public List<ViewUserJobmodel> viewUserPostJob(@RequestBody ViewUserJobmodel viewUserJobmodel){
 
+        return JobService.showUserJob(viewUserJobmodel);
+    }
+    @GetMapping(path = "view/appliedJob")
+    public List<ViewApplyJobModel> showApplyJob(@RequestBody ViewApplyJobModel viewApplyJobModel){
+        return JobService.showAppliedJob(viewApplyJobModel);
+    }
 }

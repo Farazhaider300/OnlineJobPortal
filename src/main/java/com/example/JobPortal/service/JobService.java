@@ -1,8 +1,6 @@
 package com.example.JobPortal.service;
 
-import com.example.JobPortal.model.ApplyJobModel;
-import com.example.JobPortal.model.JobModel;
-import com.example.JobPortal.model.PostJobModel;
+import com.example.JobPortal.model.*;
 
 
 import java.util.List;
@@ -16,5 +14,7 @@ public interface JobService {
 
     String removeJob(Long jobId);
 
-    List<JobModel> viewUserPostJob(String postJobModel);
+    List<ViewUserJobmodel> showUserJob(ViewUserJobmodel viewUserJobmodel);
+
+    List<ViewApplyJobModel> showAppliedJob(ViewApplyJobModel viewApplyJobModel);
 }

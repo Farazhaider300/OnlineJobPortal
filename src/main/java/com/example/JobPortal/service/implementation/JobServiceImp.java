@@ -1,8 +1,6 @@
 package com.example.JobPortal.service.implementation;
 import com.example.JobPortal.entity.*;
-import com.example.JobPortal.model.ApplyJobModel;
-import com.example.JobPortal.model.JobModel;
-import com.example.JobPortal.model.PostJobModel;
+import com.example.JobPortal.model.*;
 import com.example.JobPortal.repository.*;
 import com.example.JobPortal.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,26 +12,26 @@ import java.util.List;
 @Service
 public class JobServiceImp implements JobService {
     @Autowired
-    public JobRepository jobRepository;
+    JobRepository jobRepository;
     @Autowired
-    private UserRepository userRepository;
+    UserRepository userRepository;
     @Autowired
-    private RoleRepository roleRepository;
+    RoleRepository roleRepository;
     @Autowired
-    private UserRoleRepository userRoleRepository;
+   UserRoleRepository userRoleRepository;
     @Autowired
-    private ApplyJobRepository applyJobRepository;
+   ApplyJobRepository applyJobRepository;
     @Autowired
     private PostJobRepository postJobRepository;
 
     @Override
     public List<JobModel> showAllJobs()
     {
-    List<JobModel> jobModels = new ArrayList<>();
-    for (Job job : jobRepository.findAll()) {
-        jobModels.add(new JobModel().assemble(job));
-    }
-   return jobModels;
+        List<JobModel> jobModels = new ArrayList<>();
+        for (Job job : jobRepository.findAll()) {
+            jobModels.add(new JobModel().assemble(job));
+        }
+        return jobModels;
     }
     @Override
     public List<JobModel> showAllJobsByTitle(String searchJob)
@@ -85,25 +83,30 @@ public class JobServiceImp implements JobService {
     @Override
     public String applyForJob(ApplyJobModel applyJobModel)
     {
-    String incomingEmail=applyJobModel.getEmail();
-    Long incomingJobId=applyJobModel.getJobId();
-    UserRole userRole=userRoleRepository.findUserRoleByUser_email(incomingEmail);
-    Job job=jobRepository.findJobById(incomingJobId);
-    ApplyJob checkApplyAlready= applyJobRepository.findAllJobByUser_Id(userRole.getUser().getId());
-    if (checkApplyAlready!=null && checkApplyAlready.getJob().getId()==incomingJobId){
-        return "Already Applied";
-    }
-    else if ( job!=null && userRole!=null && userRole.getRole().getRoleName().equals("Job_Seeker") )
-    {
-        ApplyJob applyJob=new ApplyJob();
-        applyJob.setUser(userRole.getUser());
-        applyJob.setJob(job);
-        applyJobRepository.save(applyJob);
-        return "Apply Successfully";
-    }else
-    {
-        return "Something went Wrong";
-    }
+        String incomingEmail=applyJobModel.getEmail();
+        Long incomingJobId=applyJobModel.getJobId();
+        UserRole userRole=userRoleRepository.findUserRoleByUser_email(incomingEmail);
+        Job job=jobRepository.findJobById(incomingJobId);
+        List<ApplyJob> checkApplyAlready= applyJobRepository.findAllJobByUser_Id(incomingJobId);
+        if (checkApplyAlready!=null ){
+            checkApplyAlready.stream().filter(e-> e.getJob().getId().equals(incomingJobId));
+           /* List<ApplyJobModel>applyJobModels=new ArrayList<>();
+            for (ApplyJob applyJob:checkApplyAlready) {
+                applyJobModels.add(new ApplyJobModel().getJobId());
+            }*/
+            return "Already Applied";
+        }
+        else if ( job!=null && userRole!=null && userRole.getRole().getRoleName().equals("Job_Seeker") )
+        {
+            ApplyJob applyJob=new ApplyJob();
+            applyJob.setUser(userRole.getUser());
+            applyJob.setJob(job);
+            applyJobRepository.save(applyJob);
+            return "Apply Successfully";
+        }else
+        {
+            return "Something went Wrong";
+        }
     }
     @Override
     public String removeJob(Long jobId){
@@ -117,21 +120,36 @@ public class JobServiceImp implements JobService {
             return "Enable to Delete";
         }
     }
+
     @Override
-    public List<JobModel> viewUserPostJob(String incomingEmail){
+    public List<ViewUserJobmodel> showUserJob(ViewUserJobmodel viewUserJobmodel){
+        UserRole userRole= userRoleRepository.findUserRoleByUser_email(viewUserJobmodel.getEmail());
+        List<ViewUserJobmodel> listOfUserPostJobs= new ArrayList<>();
+        List<PostJob> listOfPostJob=  postJobRepository.findAllPostJobByUser_email(viewUserJobmodel.getEmail());
+        if (listOfPostJob!=null && userRole.getUser()!=null && userRole.getRole().getRoleName().equals("Job_Poster")) {
+            for (PostJob postJob : listOfPostJob) {
+                listOfUserPostJobs.add(new ViewUserJobmodel().assemble(postJob));
 
-       /* List<JobModel> listOfJob = new ArrayList<>();*/
-        User user=userRepository.findUserByEmail(incomingEmail);
-       PostJob listOfPostJob=  postJobRepository.findJobByUser_id(user.getId());
-
-        if (listOfPostJob!=null){
-           /* for (Job job: listOfPostJob  ) {
-                listOfJob.add(new JobModel().assemble((Job) listOfPostJob));
-            }*/
-            return null;
+            }
+        } else  {
+            return listOfUserPostJobs;
         }
-        return null;
+        return listOfUserPostJobs;
     }
+@Override
+    public List<ViewApplyJobModel> showAppliedJob(ViewApplyJobModel viewApplyJobModel){
+        UserRole userRole= userRoleRepository.findUserRoleByUser_email(viewApplyJobModel.getEmail());
+        List<ViewApplyJobModel> listViewApplyJobModel= new ArrayList<>();
+        List<ApplyJob> listOfApplyJob=  applyJobRepository.findAllApplyJobByUser_Email(viewApplyJobModel.getEmail());
+        if (listOfApplyJob!=null && userRole.getUser()!=null && userRole.getRole().getRoleName().equals("Job_Seeker") ){
+            for (ApplyJob applyJob : listOfApplyJob) {
+                listViewApplyJobModel.add(new ViewApplyJobModel().assemble(applyJob.getJob()));
+
+            }
+        }
+        return listViewApplyJobModel;
+    }
+
 
 
     public String check(){
