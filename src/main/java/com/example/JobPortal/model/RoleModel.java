@@ -8,5 +8,10 @@ import lombok.Data;
 public class RoleModel {
     private long roleId;
     private String role;
+    public RoleModel(Role role)
+    {
+        this.roleId = role.getId();
+        this.role = role.getRoleName();
+    }
 
 }

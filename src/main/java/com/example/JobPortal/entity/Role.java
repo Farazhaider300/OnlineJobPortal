@@ -1,7 +1,6 @@
 package com.example.JobPortal.entity;
-
-import jakarta.persistence.*;
 import lombok.Data;
+import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

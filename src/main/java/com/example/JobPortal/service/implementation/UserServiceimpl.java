@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceimpl implements UserService {
 
+  /*  @Autowired
+    BCryptPasswordEncoder passwordEncoder;*/
     @Autowired
     public UserRepository userRepository;
     @Autowired
@@ -36,7 +38,8 @@ public class UserServiceimpl implements UserService {
 
             Role role = new Role();
             role.setId(userModel.getRoleid());
-            User user=userRepository.save(userModel.dissemble());
+            User user=new User();
+            user=userRepository.save(userModel.dissemble());
             UserRole userRole = new UserRole();
             userRole.setRole(role);
             userRole.setUser(user);

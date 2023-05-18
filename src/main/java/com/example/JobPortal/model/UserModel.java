@@ -2,10 +2,17 @@ package com.example.JobPortal.model;
 
 import com.example.JobPortal.entity.Role;
 import com.example.JobPortal.entity.User;
+import com.example.JobPortal.entity.UserRole;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 public class UserModel {
+   /* @Autowired
+    private  BCryptPasswordEncoder passwordEncoder;*/
     private Long id;
     private String firstName;
     private String lastName;
@@ -13,6 +20,13 @@ public class UserModel {
     private String password;
     private boolean status;
     private long roleid;
+/*    private List<RoleModel> roles = new ArrayList<>();
+    public UserModel() {
+        User user=new User();
+        this.id = user.getId();
+        this.email = user.getEmail();
+        this.roles = user.getUserRole().stream().map((UserRole t) -> new RoleModel(t.getRole())).collect(Collectors.toList());
+    }*/
 
     // Convert model to entity
     public User dissemble() {
@@ -21,7 +35,9 @@ public class UserModel {
         user.setEmail(this.email);
         user.setFirstName(this.firstName);
         user.setLastName(this.lastName);
-        user.setPassword(this.password);
+       /* System.out.println(this.password);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();*/
+        user.setPassword(/*passwordEncoder.encode(this.password)*/ this.password);
         return user;
 
     }

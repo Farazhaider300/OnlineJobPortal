@@ -1,7 +1,6 @@
 package com.example.JobPortal.entity;
-import jakarta.persistence.*;
 import lombok.Data;
-
+import jakarta.persistence.*;
 import java.util.List;
 
 
@@ -16,13 +15,13 @@ public class UserRole {
 
     //Creating relation between userRole and User
 
-   @ManyToOne
+   @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
    @JoinColumn(name = "user_id")
    private User user;
 
    //Creating relation between userRole and role
 
-   @ManyToOne
+   @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
    @JoinColumn(name = "role_id")
     private Role role;
 /*

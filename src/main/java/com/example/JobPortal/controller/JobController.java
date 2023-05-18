@@ -1,7 +1,4 @@
 package com.example.JobPortal.controller;
-
-import com.example.JobPortal.entity.Job;
-import com.example.JobPortal.entity.PostJob;
 import com.example.JobPortal.model.*;
 import com.example.JobPortal.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;

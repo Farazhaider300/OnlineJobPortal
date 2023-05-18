@@ -1,16 +1,22 @@
 package com.example.JobPortal.security;
 
 import com.example.JobPortal.entity.User;
-import org.springframework.security.core.userdetails.UserDetails;
+import com.example.JobPortal.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+/*import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;*/
+/*import org.springframework.stereotype.Service;
 
-public class CustomUserDetailService implements UserDetailsService {
+@Service*/
+public class CustomUserDetailService /*implements UserDetailsService*/ {
+/*    @Autowired
+    UserRepository userRepository;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         AppUserDetails appUserDetails = null;
 
-        User user = this.userRepository.findUserByEmailId(username);
+        User user = this.userRepository.findUserByEmail(username);
 
         if(user == null)
         {
@@ -20,5 +26,5 @@ public class CustomUserDetailService implements UserDetailsService {
         appUserDetails = new AppUserDetails(user);
 
         return appUserDetails;
-    }
+    }*/
 }

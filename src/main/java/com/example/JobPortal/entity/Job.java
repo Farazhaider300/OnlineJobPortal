@@ -1,7 +1,8 @@
 package com.example.JobPortal.entity;
-
 import jakarta.persistence.*;
 import lombok.Data;
+
+
 import java.util.Date;
 import java.util.List;
 
@@ -27,8 +28,8 @@ public class Job {
     private String address;
 
     //Creating relation between job and apply jobs
-    @OneToMany(mappedBy = "job")
-    private List<ApplyJob> applyJobList;
+   @OneToMany(mappedBy = "job")
+   private List<ApplyJob> applyJobList;
 
     //Creating relation between job and post job
     @OneToMany(mappedBy = "job")

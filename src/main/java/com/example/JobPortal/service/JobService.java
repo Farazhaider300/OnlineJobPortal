@@ -1,6 +1,7 @@
 package com.example.JobPortal.service;
 
 import com.example.JobPortal.model.*;
+import org.springframework.stereotype.Component;
 
 
 import java.util.List;
